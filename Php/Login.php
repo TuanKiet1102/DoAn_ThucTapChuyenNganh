@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
     } elseif ($role == "TeamLeader" || $role == "Leader") {
         header("Location: ../Html/leader.html");
     } elseif ($role == "User" || $role == "Nhan Vien") {
-        header("Location: ../Html/Admin/User.html");
+        header("Location: ../Html/User/User.html");
     } else {
         header("Location: ../Html/login.html?error=role");
     }

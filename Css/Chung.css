@@ -1,0 +1,164 @@
+/* reset đơn giản */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: linear-gradient(135deg,#74ebd5,#9face6);
+  min-height: 100vh;
+  font-family: Segoe UI, sans-serif;
+  overflow-x: hidden;
+}
+
+/* thanh trên cùng */
+.header {
+  background: linear-gradient(135deg,#74ebd5,#9face6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  width: 100%;
+  z-index: 1000;
+}
+.BaGach {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  
+}
+.Texttieude {
+  font-weight: bold;
+  margin-left: 12px;
+  font-size: 18px;
+}
+
+/* sidebar nhỏ */
+.MenuNho {
+  background: linear-gradient(135deg,#74ebd5,#9face6);
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 999;
+  border-top: 2px solid rgba(0,0,0,0.2);
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  height: calc(100% - 50px);
+}
+
+/* icon menu */
+.icon {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.icon a {
+  font-size: 22px;
+  color: black;
+}
+.icon .SoThongBao {
+  position: absolute;
+  margin-left: -6px;
+  margin-top: -8px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.icon a:hover {
+  color: #fcfcfc;
+}
+
+/* menu chữ khi mở rộng */
+.menufull {
+  margin-top: 30px;
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+
+.menufull a {
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  color: black;
+  text-decoration: none;
+  font-weight: 700;
+  width: 100%;}
+.menufull a i {
+  float: right;               
+}
+.menufull .SoThongBao {
+  position: absolute;
+  right: 16px;
+  margin-left: -6px;
+  margin-top: -2px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  right: 16px;
+  display: none; 
+}
+.menufull a:hover,
+.menufull a.active {
+  background-color: rgba(255,255,255,0.2);
+}
+.menufull h3 {
+  color: white;
+  font-weight: 700;
+  padding: 12px 20px;
+  width: 100%;
+}
+
+/* khi sidebar bung ra */
+.MenuNho.rongra {
+  width: 240px;
+}
+.MenuNho.rongra .menufull {
+  display: flex;
+}
+.MenuNho.rongra .icon {
+  display: none;
+}
+
+/* ===== MEDIA QUERIES (đặt sau) ===== */
+
+/* Điện thoại */
+@media screen and (max-width: 1080px) {
+  .MenuNho { 
+    width: 60px; 
+  }
+  .MenuNho.rongra { 
+    width: 160px; 
+  }
+  .menufull a { 
+    font-size: 14px; 
+    padding: 10px 16px; 
+  }
+}
+/* Máy tính */
+@media screen and (min-width: 1081px) {
+  .MenuNho { 
+    width: 60px; }
+  .MenuNho.rongra {
+    width: 240px;
+  }
+  .menufull a { 
+    font-size: 16px;
+    padding: 14px 20px;
+  }
+}
