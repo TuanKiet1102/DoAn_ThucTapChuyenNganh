@@ -1,6 +1,6 @@
 <?php
 session_start();
- header("Location:./Admin/DuAn/index.php");
+
 $dataFile = __DIR__ . '/data.json';
 
 // Initialize data file if not exists
