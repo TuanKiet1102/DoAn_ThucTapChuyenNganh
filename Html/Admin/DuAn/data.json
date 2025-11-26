@@ -1,0 +1,31 @@
+{
+    "columns": [
+        {
+            "id": "todo",
+            "name": "To Do",
+            "cards": [
+                {
+                    "id": "c-70d1d5",
+                    "title": "Chia task 1",
+                    "desc": "Chia task cho nhiều người"
+                }
+            ]
+        },
+        {
+            "id": "doing",
+            "name": "Doing",
+            "cards": []
+        },
+        {
+            "id": "done",
+            "name": "Done",
+            "cards": [
+                {
+                    "id": "c-ca54aa",
+                    "title": "Chia task 1",
+                    "desc": ""
+                }
+            ]
+        }
+    ]
+}
