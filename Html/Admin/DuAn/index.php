@@ -48,7 +48,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($data['columns'] as &$col) {
                 if ($col['id'] === $columnId) {
                     $cardId = 'c-' . substr(uniqid(), -6);
-                    $col['cards'][] = ["id" => $cardId, "title" => $title, "desc" => $desc];
+                    $col['cards'][] = [
+                        "id" => $cardId,
+                        "title" => $title,
+                        "desc" => $desc,
+                        "assignee" => null, 
+                        "status" => "todo", 
+                        "files" => [],      
+                        "review" => [       
+                            "approved" => null,
+                            "feedback" => ""
+                            ]
+                        ];
+
                     break;
                 }
             }
