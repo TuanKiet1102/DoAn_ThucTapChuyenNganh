@@ -1,36 +1,149 @@
 {
-    "columns": [
-        {
-            "id": "todo",
-            "name": "To Do",
-            "cards": [
+    "days": {
+        "2025-11-27": {
+            "columns": [
                 {
-                    "id": "c-70d1d5",
-                    "title": "Chia task 1",
-                    "desc": "Chia task cho nhiều người"
+                    "id": "todo",
+                    "name": "To Do",
+                    "cards": [
+                        {
+                            "id": "c-519309",
+                            "title": "ngay thu 1",
+                            "desc": "",
+                            "date": "2025-11-27",
+                            "col": "todo"
+                        },
+                        {
+                            "id": "c-777155",
+                            "title": "ss",
+                            "desc": "",
+                            "date": "2025-11-27",
+                            "col": "todo"
+                        },
+                        {
+                            "id": "c-466169",
+                            "title": "Chia task 2",
+                            "desc": "",
+                            "date": "2025-11-27",
+                            "col": "todo"
+                        }
+                    ]
                 },
                 {
-                    "id": "c-063dc1",
-                    "title": "Chia task 2",
-                    "desc": "Cức chiên bơ"
-                }
-            ]
-        },
-        {
-            "id": "doing",
-            "name": "Doing",
-            "cards": []
-        },
-        {
-            "id": "done",
-            "name": "Done",
-            "cards": [
+                    "id": "doing",
+                    "name": "Doing",
+                    "cards": [
+                        {
+                            "id": "c-400737",
+                            "title": "á",
+                            "desc": "",
+                            "date": "2025-11-27",
+                            "col": "doing"
+                        }
+                    ]
+                },
                 {
-                    "id": "c-ca54aa",
-                    "title": "Chia task 1",
-                    "desc": ""
+                    "id": "done",
+                    "name": "Done",
+                    "cards": [
+                        {
+                            "id": "c-676696",
+                            "title": "Chia task 2",
+                            "desc": "",
+                            "date": "2025-11-27",
+                            "col": "done"
+                        }
+                    ]
                 }
             ]
+        },
+        "2025-11-28": {
+            "columns": [
+                {
+                    "id": "todo",
+                    "name": "To Do",
+                    "cards": []
+                },
+                {
+                    "id": "doing",
+                    "name": "Doing",
+                    "cards": []
+                },
+                {
+                    "id": "done",
+                    "name": "Done",
+                    "cards": [
+                        {
+                            "id": "c-010406",
+                            "title": "ss",
+                            "desc": "",
+                            "date": "2025-11-28",
+                            "col": "done"
+                        }
+                    ]
+                }
+            ]
+        },
+        "2025-11-29": {
+            "columns": [
+                {
+                    "id": "todo",
+                    "name": "To Do",
+                    "cards": []
+                },
+                {
+                    "id": "doing",
+                    "name": "Doing",
+                    "cards": []
+                },
+                {
+                    "id": "done",
+                    "name": "Done",
+                    "cards": []
+                }
+            ]
+        },
+        "2025-11-26": {
+            "columns": [
+                {
+                    "id": "todo",
+                    "name": "To Do",
+                    "cards": []
+                },
+                {
+                    "id": "doing",
+                    "name": "Doing",
+                    "cards": []
+                },
+                {
+                    "id": "done",
+                    "name": "Done",
+                    "cards": []
+                }
+            ]
+        }
+    },
+    "archive_done": [
+        {
+            "id": "c-352378",
+            "title": "Chia task 1",
+            "desc": "",
+            "date": "2025-11-27",
+            "col": "done"
+        },
+        {
+            "id": "c-010406",
+            "title": "ss",
+            "desc": "",
+            "date": "2025-11-28",
+            "col": "done"
+        },
+        {
+            "id": "c-676696",
+            "title": "Chia task 2",
+            "desc": "",
+            "date": "2025-11-27",
+            "col": "done"
         }
     ]
 }

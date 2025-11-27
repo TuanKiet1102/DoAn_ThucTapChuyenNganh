@@ -1,66 +1,100 @@
-function closestCardIndex(container, clientY) {
-  const cards = Array.from(container.querySelectorAll('.card'));
-  let index = cards.length;
-  for (let i = 0; i < cards.length; i++) {
-    const rect = cards[i].getBoundingClientRect();
-    if (clientY < rect.top + rect.height / 2) {
-      index = i;
-      break;
+document.addEventListener('DOMContentLoaded', () => {
+  function closestCardIndex(container, clientY) {
+    const cards = Array.from(container.querySelectorAll('.card'));
+    let index = cards.length;
+    for (let i = 0; i < cards.length; i++) {
+      const rect = cards[i].getBoundingClientRect();
+      if (clientY < rect.top + rect.height / 2) {
+        index = i;
+        break;
+      }
     }
+    return index;
   }
-  return index;
-}
 
-let dragData = null;
+  let dragData = null;
 
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('dragstart', e => {
-    dragData = {
-      cardId: card.dataset.cardId,
-      fromCol: card.dataset.colId
-    };
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', dragData.cardId);
-    setTimeout(() => card.classList.add('dragging'), 0);
-  });
+  // Attach drag listeners to cards (initial load)
+  function attachCardDragListeners() {
+    document.querySelectorAll('.card').forEach(card => {
+      // Avoid attaching twice
+      if (card.dataset.dragAttached === '1') return;
+      card.dataset.dragAttached = '1';
 
-  card.addEventListener('dragend', () => {
-    document.querySelectorAll('.cards').forEach(c => c.classList.remove('drag-over'));
-    const el = document.querySelector(`[data-card-id="${dragData.cardId}"]`);
-    if (el) el.classList.remove('dragging');
-    dragData = null;
-  });
-});
+      card.addEventListener('dragstart', e => {
+        dragData = {
+          cardId: card.dataset.cardId,
+          fromCol: card.dataset.colId,
+          fromDate: card.dataset.date
+        };
+        e.dataTransfer.effectAllowed = 'move';
+        try {
+          e.dataTransfer.setData('text/plain', dragData.cardId);
+        } catch (err) {
+          // Some browsers may throw; it's non-fatal
+        }
+        setTimeout(() => card.classList.add('dragging'), 0);
+      });
 
-document.querySelectorAll('.cards').forEach(container => {
-  container.addEventListener('dragover', e => {
-    e.preventDefault();
-    container.classList.add('drag-over');
-  });
+      card.addEventListener('dragend', () => {
+        document.querySelectorAll('.cards').forEach(c => c.classList.remove('drag-over'));
+        const el = document.querySelector(`[data-card-id="${dragData?.cardId}"]`);
+        if (el) el.classList.remove('dragging');
+        dragData = null;
+      });
+    });
+  }
 
-  container.addEventListener('dragleave', () => {
-    container.classList.remove('drag-over');
-  });
+  attachCardDragListeners();
 
-  container.addEventListener('drop', e => {
-    e.preventDefault();
-    container.classList.remove('drag-over');
-    if (!dragData) return;
+  // Attach drop listeners to containers
+  document.querySelectorAll('.cards').forEach(container => {
+    container.addEventListener('dragover', e => {
+      e.preventDefault();
+      container.classList.add('drag-over');
+    });
 
-    const toCol = container.dataset.colId;
-    const position = closestCardIndex(container, e.clientY);
+    container.addEventListener('dragleave', () => {
+      container.classList.remove('drag-over');
+    });
 
-    fetch('index.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-      body: new URLSearchParams({
+    container.addEventListener('drop', e => {
+      e.preventDefault();
+      container.classList.remove('drag-over');
+      if (!dragData) return;
+
+      const toCol = container.dataset.colId;
+      const toDate = container.dataset.date || dragData.fromDate;
+      const position = closestCardIndex(container, e.clientY);
+
+      const params = new URLSearchParams({
         action: 'move_card',
         card_id: dragData.cardId,
         from_col: dragData.fromCol,
         to_col: toCol,
-        position: position
+        position: String(position),
+        from_date: dragData.fromDate,
+        to_date: toDate
+      });
+
+      fetch(`index.php?date=${encodeURIComponent(toDate)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+        body: params
       })
-    }).then(res => res.json())
-      .then(() => location.reload());
+        .then(res => res.json())
+        .then(() => {
+          // Reload to the target date so user sees the result
+          const url = new URL(window.location.href);
+          url.searchParams.set('date', toDate);
+          window.location.replace(url.toString());
+        })
+        .catch(() => {
+          window.location.reload();
+        });
+    });
   });
+
+  // If your UI dynamically adds cards without full reload, call attachCardDragListeners() after insertion.
 });
+

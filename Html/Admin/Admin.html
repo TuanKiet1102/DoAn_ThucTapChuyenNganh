@@ -6,6 +6,44 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- CSS riêng -->
   <link rel="stylesheet" href="../../Css/Chung.css">
+  <!-- Nhỏ: style bổ sung để nội dung chính không chồng lên menu trái -->
+  <style>
+    /* Giữ nguyên code ban đầu, chỉ thêm style tối thiểu để iframe hiển thị đúng */
+    .content-wrapper {
+      margin-top: 50px; /* tránh header cố định */
+      margin-left: 60px; /* khớp width mặc định của .MenuNho */
+      padding: 16px;
+      box-sizing: border-box;
+      min-height: calc(100vh - 50px);
+    }
+    /* Khi menu mở rộng bằng class .rongra (nếu có) */
+    .MenuNho.rongra ~ .content-wrapper,
+    .MenuNho.rongra + .content-wrapper {
+      margin-left: 240px;
+    }
+    .trello-wrapper {
+      background: linear-gradient(135deg,#74ebd5,#9face6);
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      height: calc(100vh - 50px - 36px);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    #trelloFrame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 6px;
+      display: block;
+      background: transparent;
+    }
+    @media (max-width:1080px){
+      .content-wrapper { margin-left: 60px; padding: 12px; }
+      .MenuNho.rongra ~ .content-wrapper { margin-left: 160px; }
+      .trello-wrapper { height: calc(100vh - 50px - 28px); }
+    }
+  </style>
 </head>
 <body>
   <!-- Thanh công cụ -->
@@ -41,6 +79,20 @@
       <a href="logout.html" >Đăng xuất <i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
   </aside>
+
+  <!-- === CHỈ THÊM PHẦN NÀY VÀ GIỮ NGUYÊN TOÀN BỘ CODE BAN ĐẦU === -->
+  <main class="content-wrapper" aria-label="Nội dung chính">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <div style="font-weight:700;font-size:18px;color:#07102a;">Trello Mini</div>
+      <div style="color:rgba(0,0,0,0.55);font-size:13px;">Hiển thị Trello Mini trực tiếp trong Admin</div>
+    </div>
+
+    <div class="trello-wrapper" role="region" aria-label="Trello Mini">
+      <!-- Giữ nguyên đường dẫn Trello Mini như bạn có; nếu cần thay đổi, chỉnh src -->
+      <iframe id="trelloFrame" src="./DuAn/index.php" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>
+    </div>
+  </main>
+  <!-- === KẾT THÚC PHẦN THÊM === -->
 
   <!-- JS riêng -->
   <script src="../../Javascript/Chung.js"></script>
